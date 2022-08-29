@@ -47,12 +47,17 @@ void TestTask3(const char* filePath) {
     list.PrintList();
 
     FILE* file = fopen(filePath, "wb");
+    if (file == NULL)
+        printf("File is not open in wb mode");
     list.Serialize(file);
     fclose(file);
 
     DLList listClone;
     file = fopen(filePath, "rb");
+    if (file == NULL)
+        printf("File is not open in rb mode");
     listClone.Deserialize(file);
+    fclose(file);
 
     printf("\n");
     listClone.PrintList();
